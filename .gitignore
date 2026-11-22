@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Next.js build
+client/.next/
+client/out/
+client/build/
+*.tsbuildinfo
+
+# Server build
+server/dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
