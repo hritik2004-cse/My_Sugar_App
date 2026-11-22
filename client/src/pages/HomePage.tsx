@@ -1,10 +1,10 @@
 "use client";
 
 import DataModel from "@/components/DataModel";
-import { useData } from "@/context/DataContext";
+import { DataProvider, useData } from "@/context/DataContext";
 import { PiEyedropperSampleFill } from "react-icons/pi";
 
-const HomePage = () => {
+const HomePageContent = () => {
   const { loading, data } = useData();
 
   return (
@@ -40,6 +40,14 @@ const HomePage = () => {
         </div>
       )}
     </>
+  );
+};
+
+const HomePage = () => {
+  return (
+    <DataProvider>
+      <HomePageContent />
+    </DataProvider>
   );
 };
 
