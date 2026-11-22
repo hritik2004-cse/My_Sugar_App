@@ -56,7 +56,6 @@ const allData = async (req: Request, res: Response) => {
 const deleteData = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    console.log("[DELETE] Received delete request for id:", id);
     if (!id || typeof id !== "string") {
       return res
         .status(400)

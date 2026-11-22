@@ -7,7 +7,7 @@ const addDataService = async (data: dataDto) => {
 };
 
 const allDataService = async () => {
-  const data = await Data.find();
+  const data = await Data.find().sort({ createdAt: -1 });
   return data;
 };
 

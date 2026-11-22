@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { DataProvider } from "@/context/DataContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +30,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className="h-screen flex flex-col bg-background text-foreground overflow-hidden relative"
         suppressHydrationWarning
       >
-        <Navbar />
-        <main className="overflow-auto">{children}</main>
+        <DataProvider>
+          <Navbar />
+          <main className="overflow-auto">{children}</main>
+        </DataProvider>
       </body>
     </html>
   );

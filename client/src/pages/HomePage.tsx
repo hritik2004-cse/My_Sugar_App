@@ -1,31 +1,11 @@
 "use client";
 
 import DataModel from "@/components/DataModel";
-import api from "@/lib/api";
-import { Data } from "@/types/data.types";
-import { useEffect, useState } from "react";
+import { useData } from "@/context/DataContext";
+import { PiEyedropperSampleFill } from "react-icons/pi";
 
 const HomePage = () => {
-  const [data, setData] = useState<Data[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const loadData = async () => {
-    try {
-      setLoading(true);
-      const response = await api.get("data/all");
-      setData(response.data.data);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(`Error occurred: ${error.name}`);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
+  const { loading, data } = useData();
 
   return (
     <>
@@ -34,18 +14,21 @@ const HomePage = () => {
       ) : (
         <div className="h-full w-full">
           {data.length === 0 ? (
-            <div className="h-full w-full flex items-center justify-center">
-              <p className="text-foreground/40 text-sm">
-                No readings yet. Click &ldquo;Add&rdquo; to log your first sugar
-                reading.
-              </p>
+            <div className="h-[80vh] w-full flex items-center justify-center">
+              <div className="flex flex-col justify-center items-center">
+                <PiEyedropperSampleFill className="text-4xl text-foreground/70" />
+                <p className="text-foreground/70 text-base">No readings yet.</p>
+                <p className="text-foreground/40 text-sm">
+                  Click &ldquo;Add&rdquo; to log your first sugar reading.
+                </p>
+              </div>
             </div>
           ) : (
-            <div className="w-full h-full gap-4 text-foreground grid grid-cols-1">
+            <div className="w-full h-full gap-4 text-foreground grid grid-cols-1 scrollbar-none">
               {data.map((data) => {
                 return (
                   <DataModel
-                    loadData={loadData}
+                    key={data._id}
                     reading={data.reading}
                     id={data._id}
                     date={data.date}
